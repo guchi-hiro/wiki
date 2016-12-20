@@ -122,7 +122,8 @@ Apache Spark自体はもっと多くの学習モデルをサポートしてい�
 
 アーキテクチャは以下の通り。
 
-![Architecture](http://raw.githubusercontent.com/guchi-hiro/wiki/master/Meteos-architecture.png)
+![Architecture]
+(http://raw.githubusercontent.com/guchi-hiro/wiki/master/Meteos-architecture.png)
 
 機械学習の場を「Experiment」と呼んでます。
 このExperimentについてはSaharaのAPIをたたいて作成します。
