@@ -85,7 +85,7 @@ Apache Spark自体はもっと多くの学習モデルをサポートしてい�
 
 * 教師あり学習とは
 
-> 教師あり学習とは、予測したい項目がすでに学習データに含まれているものです。
+> 教師あり学習とは、予測したい項目がすでに学習データに含まれている学習のことをいいます。
 
 > たとえば過去の売り上げ情報から、未来の売上高を予測するモデルを作成するとします。
 > この時、予測したい項目は「売上高」であり、その項目は学習データに含まれています。
@@ -120,14 +120,15 @@ Apache Spark自体はもっと多くの学習モデルをサポートしてい�
 
 ![Architecture](https://raw.githubusercontent.com/guchi-hiro/wiki/master/Meteos-architecture.png)
 
-機械学習の場を「Experiment」と呼んでます。このExperimentについてはSaharaのAPIをたたいて作成します。
+RESTのインタフェースを持つ「meteos-api」とMachine Learningに関する各種リソースを管理する「meteos-engine」から構成されます。
+機械学習の場を「Experiment」と呼んでます。このExperimentについてはSaharaのAPIをたたいて、Saharaに作成してもらいます。
 実体はVMの集合です。
 
 Experimentを作成する前に、Templateを作成します。
 Templateには、「Sparkのバージョン（現状1.6のみ）」「マスターノード（VM）数」「ワーカーノード（VM）数」
-それらノードのFlavorなどを指定します。
+それらノードのFlavorおよび利用するFloating ip Networkなどを指定します。
 
-Experiment作成完了後、このExperiment上にSwift上のデータをダウンロードして
+Experiment作成完了後、このExperiment上にSwift上に格納されているの学習データをダウンロードし、
 SparkのMapReduceを実施して学習モデルを作成してきます。
 
 学習したモデルにあるInputを渡すと、それを元に予測された
