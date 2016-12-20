@@ -15,23 +15,26 @@ Machine Learning as a Serviceに関する新しいプロジェクトを作りま
 
 * 単純に機械学習が流行っているし、興味があったから
 
- * 機械学習(特にApache Spark)に関する記事を目にする機会が多くやってみようと思った
+  機械学習(特にApache Spark)に関する記事を目にする機会が多くやってみようと思った
 
 * 機械学習をするための環境がOpenStackに既にそろっている
-
- * 機械学習をやるためには「大きなデータを置く場所」と「大きなデータをさばく場所」が必要
- * SwiftとSaharaでできる。しかもSaharaはSparkをサポートしている
+  
+  機械学習をやるためには「大きなデータを置く場所」と「大きなデータをさばく場所」が必要
+ 
+  SwiftとSaharaでできる。しかもSaharaはSparkをサポートしている
 
 * OpenStackの適用領域としてBig Dataが普及している
 
- * 先日のバルセロナサミットでのuser surveyの結果、Big Dataは適用領域として第5位
- * 1. IaaS, 2.Telecom NFV, 3.Storage/Backup/Archive, 4.Business Application, 5.Big Data
+  先日のバルセロナサミットでのuser surveyの結果、Big Dataは適用領域として第5位
+ 
+  １. IaaS, ２.Telecom NFV, ３.Storage/Backup/Archive, ４.Business Application, ５.Big Data
 
 1.名前
 --------
 
 プロジェクトをやるには名前を決めないといけません。
 日本人が作ったことをアピールするために日本語の名前にしようかと思ったけどいいのが浮かばなかった。。
+
 結局「Meteos」にしました。
 
 「Meteos」は「Meteorologist（気象学者）」と「OS（OpenStack）」を組み合わせた造語です。
@@ -42,16 +45,17 @@ Machine Learning as a Serviceに関する新しいプロジェクトを作りま
 MeteosはApache SparkをベースとしたMachine Learning as a Serviceです。
 Meteosがやることは非常にシンプルで以下の２つです。
 
-1. 大量のデータから学習する
-2．学習したデータを元にある値を予測する
+**1. 大量のデータから学習する**
+
+**2．学習したデータを元にある値を予測する**
 
 （たとえば過去の気象データから学習し、明日の天気を予想するなど）
 
 大量のデータから学習した際、Meteosは学習モデルというものを作成します。
+
 この学習モデルに対してある値を与えてやると、その値をもとに予測値を返却してくれます。
 
-Inputとしてどういう値を受け付けるか、Outputとしてどういう値を返すかについては
-学習モデル作成時に決定されます。
+Inputとしてどういう値を受け付けるか、Outputとしてどういう値を返すかについては学習モデル作成時に決定されます。
 
 3.Meteosの学習モデル
 -------------------
@@ -64,15 +68,19 @@ Apache Spark自体はもっと多くの学習モデルをサポートしてい�
 
 * 教師あり学習
 
- * ロジスティック回帰モデル
- * 線形回帰モデル
- * 決定木モデル
+  ロジスティック回帰モデル
+  
+  線形回帰モデル
+  
+  決定木モデル
 
 * 教師なし学習
 
- * KMeans(クラス分け)モデル
- * Recommendationモデル
- * Word2Vecモデル
+  KMeans(クラス分け)モデル
+  
+  Recommendationモデル
+  
+  Word2Vecモデル
 
 学習モデルは「教師あり学習」と「教師なし学習」に分けられます
 
@@ -110,6 +118,9 @@ Apache Spark自体はもっと多くの学習モデルをサポートしてい�
 -----------------------
 
 アーキテクチャは以下の通り。
+
+![Architecture](http://raw.githubusercontent.com/guchi-hiro/wiki/master/Meteos-architecture.png)
+
 機械学習の場を「Experiment」と呼んでます。
 このExperimentについてはSaharaのAPIをたたいて作成します。
 実体はVMの集合です。
