@@ -8,6 +8,7 @@ OpenStackでMachine Learning
 
 この度、OpenStack上でMachine Learningをサービスとして提供する
 Machine Learning as a Serviceに関する新しいプロジェクトを作りました。
+
 今日はその紹介をしたいと思います。
 
 0.モチベーション
@@ -43,6 +44,7 @@ Machine Learning as a Serviceに関する新しいプロジェクトを作りま
 ------------------
 
 MeteosはApache SparkをベースとしたMachine Learning as a Serviceです。
+
 Meteosがやることは非常にシンプルで以下の２つです。
 
 **1. 大量のデータから学習する**
@@ -63,6 +65,7 @@ Inputとしてどういう値を受け付けるか、Outputとしてどういう
 （ここは完全に機械学習の話。）
 
 Meteosは現状学習モデルとして以下のものをサポートしています。
+
 Apache Spark自体はもっと多くの学習モデルをサポートしていますが
 それらについては今後対応予定です。
 
