@@ -3,12 +3,10 @@ OpenStackでMachine Learning
 ================================
 
 この記事は
-`OpenStack Advent Calendar 2016 <http://www.adventar.org/calendars/1739>`_
+[OpenStack Advent Calendar 2016](http://www.adventar.org/calendars/1739)
 の20日目の記事です。
 
-この度、OpenStack上でMachine Learningをサービスとして提供する
-Machine Learning as a Serviceに関する新しいプロジェクトを作りました。
-
+この度、OpenStack上でMachine Learningをサービスとして提供するMachine Learning as a Serviceに関する新しいプロジェクトを作りました。
 今日はその紹介をしたいと思います。
 
 0.モチベーション
@@ -54,9 +52,7 @@ Meteosがやることは非常にシンプルで以下の２つです。
 （たとえば過去の気象データから学習し、明日の天気を予想するなど）
 
 大量のデータから学習した際、Meteosは学習モデルというものを作成します。
-
 この学習モデルに対してある値を与えてやると、その値をもとに予測値を返却してくれます。
-
 Inputとしてどういう値を受け付けるか、Outputとしてどういう値を返すかについては学習モデル作成時に決定されます。
 
 3.Meteosの学習モデル
@@ -89,44 +85,42 @@ Apache Spark自体はもっと多くの学習モデルをサポートしてい�
 
 * 教師あり学習とは
 
- 教師あり学習とは、予測したい項目がすでに学習データに含まれているものです。
+> 教師あり学習とは、予測したい項目がすでに学習データに含まれているものです。
 
- たとえば過去の売り上げ情報から、未来の売上高を予測するモデルを作成するとします。
- この時、予測したい項目は「売上高」であり、その項目は学習データに含まれています。
- よって、「休日は売上高が高い」や「雨の日は売上高が低い」など過去の情報から
- 予測したい項目の傾向を把握することができます。その傾向から未来の値を予測します。
+> たとえば過去の売り上げ情報から、未来の売上高を予測するモデルを作成するとします。
+> この時、予測したい項目は「売上高」であり、その項目は学習データに含まれています。
+> よって、「休日は売上高が高い」や「雨の日は売上高が低い」など過去の情報から
+> 予測したい項目の傾向を把握することができます。その傾向から未来の値を予測します。
 
- 売上高のようにある数量を予測したい場合は、「線形回帰モデル」を利用します。
- その他にもある値に対して1か0を予測する「ロジスティック回帰モデル」や「決定木モデル」
- があります。
+> 売上高のようにある数量を予測したい場合は、「線形回帰モデル」を利用します。
+> その他にもある値に対して1か0を予測する「ロジスティック回帰モデル」や「決定木モデル」
+> があります。
 
 * 教師なし学習とは
 
- 教師なし学習とは、予測したい項目が学習データに含まれてないものをさします。
+> 教師なし学習とは、予測したい項目が学習データに含まれてないものをさします。
 
- たとえば、ある値を測定するセンサーがあるとします。
- 大量のセンサーからの測定値一覧を収集し、どのセンサーが故障しているかを予測するとします。
- この時、予測したい項目は「センサーが故障しているかどうか」であり、その項目は
- 学習データに含まれていません。学習データは測定値一覧のみです。
+> たとえば、ある値を測定するセンサーがあるとします。
+> 大量のセンサーからの測定値一覧を収集し、どのセンサーが故障しているかを予測するとします。
+> この時、予測したい項目は「センサーが故障しているかどうか」であり、その項目は
+> 学習データに含まれていません。学習データは測定値一覧のみです。
 
- なので測定値一覧から、このセンサーがとり得る値を想定し、その値の範囲から外れたもの＝故障
- という感じで予測していきます。
+> なので測定値一覧から、このセンサーがとり得る値を想定し、その値の範囲から外れたもの＝故障
+> という感じで予測していきます。
 
- このようにデータを元に対象をクラス分けする場合は「KMeansモデル」を利用します。
- その他に、ユーザの好みを分析して、似たような好みを持つユーザが好むアイテムを薦める
- 「Recommendationモデル」や、文字をベクトル（数量）に変換してある文字の類義語を予測する
- 「Word2Vecモデル」などがあります。
+> このようにデータを元に対象をクラス分けする場合は「KMeansモデル」を利用します。
+> その他に、ユーザの好みを分析して、似たような好みを持つユーザが好むアイテムを薦める
+> 「Recommendationモデル」や、文字をベクトル（数量）に変換してある文字の類義語を予測する
+> 「Word2Vecモデル」などがあります。
 
 4.Meteosアーキテクチャ
 -----------------------
 
 アーキテクチャは以下の通り。
 
-![Architecture]
-(http://raw.githubusercontent.com/guchi-hiro/wiki/master/Meteos-architecture.png)
+![Architecture](https://raw.githubusercontent.com/guchi-hiro/wiki/master/Meteos-architecture.png)
 
-機械学習の場を「Experiment」と呼んでます。
-このExperimentについてはSaharaのAPIをたたいて作成します。
+機械学習の場を「Experiment」と呼んでます。このExperimentについてはSaharaのAPIをたたいて作成します。
 実体はVMの集合です。
 
 Experimentを作成する前に、Templateを作成します。
@@ -139,7 +133,6 @@ SparkのMapReduceを実施して学習モデルを作成してきます。
 学習したモデルにあるInputを渡すと、それを元に予測された
 Outputを出力するという仕組みです。
 
-
 5.サンプル集
 -------------
 
@@ -147,14 +140,14 @@ Outputを出力するという仕組みです。
 サンプル集をまとめていますので
 ぜひ試してみてください。
 
-* `インストール手順 <https://wiki.openstack.org/wiki/Meteos/Devstack>`_
+* [インストール手順](https://wiki.openstack.org/wiki/Meteos/Devstack)
 
-* `売上高を予測するサンプル <https://wiki.openstack.org/wiki/Meteos/ExampleLinear>`_
+* [売上高を予測するサンプル](https://wiki.openstack.org/wiki/Meteos/ExampleLinear)
 
-* `株を買うべきかどうかを予測するサンプル <https://wiki.openstack.org/wiki/Meteos/ExampleDecisionTree>`_
+* [株を買うべきかどうかを予測するサンプル](https://wiki.openstack.org/wiki/Meteos/ExampleDecisionTree)
 
-* `スキル毎にユーザをクラス分けするサンプル <https://wiki.openstack.org/wiki/Meteos/ExampleKmeans>`_
+* [スキル毎にユーザをクラス分けするサンプル](https://wiki.openstack.org/wiki/Meteos/ExampleKmeans)
 
-* `あるユーザへのお勧め映画を見つけるサンプル <https://wiki.openstack.org/wiki/Meteos/ExampleRecommend>`_
+* [あるユーザへのお勧め映画を見つけるサンプル](https://wiki.openstack.org/wiki/Meteos/ExampleRecommend)
 
-* `類義語を予測するサンプル <https://wiki.openstack.org/wiki/Meteos/ExampleWord2Vec>`_
+* [類義語を予測するサンプル](https://wiki.openstack.org/wiki/Meteos/ExampleWord2Vec)
